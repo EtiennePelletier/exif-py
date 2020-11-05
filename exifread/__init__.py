@@ -7,6 +7,7 @@ from typing import BinaryIO
 
 from .exif_log import get_logger
 from .classes import ExifHeader
+from .serialize import convert_hdr_tags
 from .tags import DEFAULT_STOP_TAG
 from .utils import ord_, make_string
 from .heic import HEICExifFinder
@@ -239,7 +240,8 @@ def _determine_type(fh: BinaryIO) -> tuple:
 
 def process_file(fh: BinaryIO, stop_tag=DEFAULT_STOP_TAG,
                  details=True, strict=False, debug=False,
-                 truncate_tags=True, auto_seek=True):
+                 truncate_tags=True, auto_seek=True,
+                 convert_ifdtags=False) -> dict:
     """
     Process an image file (expects an open file object).
 
@@ -313,4 +315,9 @@ def process_file(fh: BinaryIO, stop_tag=DEFAULT_STOP_TAG,
             xmp_bytes = _get_xmp(fh)
         if xmp_bytes:
             hdr.parse_xmp(xmp_bytes)
-    return hdr.tags
+
+    if not convert_ifdtags:
+        return hdr.tags
+
+    return convert_hdr_tags(hdr.tags)
+
