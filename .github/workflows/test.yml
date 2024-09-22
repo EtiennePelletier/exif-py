@@ -45,6 +45,10 @@ jobs:
       run: |
         pip install -e .
 
+    - name: Test sort
+      run: |
+        make sort
+
     - name: Run in debug and color mode
       run: |
         make run
