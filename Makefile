@@ -41,8 +41,11 @@ reqs-install: ## Install with all requirements
 
 samples-download: ## Install sample files used for testing.
 	rm -fr master.tar.gz exif-samples-master
-	wget https://github.com/ianare/exif-samples/archive/master.tar.gz
-	tar -xzf master.tar.gz
+	wget https://github.com/EtiennePelletier/exif-samples/archive/update_dump.tar.gz
+	tar -xzf update_dump.tar.gz
+	mv exif-samples-update_dump exif-samples-master
+	#wget https://github.com/ianare/exif-samples/archive/master.tar.gz
+	#tar -xzf master.tar.gz
 
 run: ## Run EXIF.py on sample images
 	$(FIND_IMAGES) EXIF.py -dc
