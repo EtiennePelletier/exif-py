@@ -52,7 +52,8 @@ run: ## Run EXIF.py on sample images
 
 compare: ## Run and compare exif dump
 	$(FIND_IMAGES) EXIF.py > exif-samples-master/dump_test
-	diff -Z --side-by-side --suppress-common-lines exif-samples-master/dump exif-samples-master/dump_test
+	#diff -Z --side-by-side --suppress-common-lines exif-samples-master/dump exif-samples-master/dump_test
+	diff -Z --suppress-common-lines exif-samples-master/dump exif-samples-master/dump_test
 
 build:  ## build distribution
 	rm -fr ./dist
