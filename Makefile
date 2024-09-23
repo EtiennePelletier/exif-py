@@ -47,15 +47,11 @@ samples-download: ## Install sample files used for testing.
 	#wget https://github.com/ianare/exif-samples/archive/master.tar.gz
 	#tar -xzf master.tar.gz
 
-sort:  # Testing file name sorting
-	find exif-samples-master -regextype posix-egrep -iregex ".*\.(bmp|gif|heic|heif|jpg|jpeg|png|tiff|webp)" | LC_COLLATE=C sort -f
-
 run: ## Run EXIF.py on sample images
 	$(FIND_IMAGES) EXIF.py -dc
 
 compare: ## Run and compare exif dump
 	$(FIND_IMAGES) EXIF.py > exif-samples-master/dump_test
-	#diff -Z --side-by-side --suppress-common-lines exif-samples-master/dump exif-samples-master/dump_test
 	diff -Zu --color --suppress-common-lines exif-samples-master/dump exif-samples-master/dump_test
 
 build:  ## build distribution
